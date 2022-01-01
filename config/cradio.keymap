@@ -98,7 +98,7 @@
        	colemak_layer { //colemak
 		bindings = <
 		&kp Q 		&kp W 		&kp F 	 		&kp P 			&kp G 					&kp J 		&kp L  			&kp U    		&kp Y   	&kp SEMI 
-		&hm LGUI A 	&hm LALT R 	&hm LCTRL S 	&kp LSHIFT T 	&kp D 			      	&kp H 		&hm RSHIFT N 	&hm RCTRL E 	&hm LALT I 	&hm RGUI O
+		&hm LGUI A 	&hm LALT R 	&hm LCTRL S 	&hm LSHIFT T 	&kp D 			      	&kp H 		&hm RSHIFT N 	&hm RCTRL E 	&hm LALT I 	&hm RGUI O
 		&kp Z 		&kp X 		&kp C 			&kp V 			&kp B				    &kp N 		&kp M  			&kp CMMA 		&kp DOT 	&kp SLASH
           										&mo 2 			&kp LSHIFT  			&kp SPACE 	&mo 3 
 		>;
