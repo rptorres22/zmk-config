@@ -15,6 +15,19 @@
 };
 
 / { 
+	// Tap-preferred (Similar to IGNORE_TAP_INTERRUPT in QMK)
+	behaviors {        
+		hm: homerow_mods {            
+			compatible = "zmk,behavior-hold-tap";            
+			label = "HOMEROW_MODS";            
+			#binding-cells = <2>;            
+			tapping-term-ms = <150>;            
+			quick-tap-ms = <0>;            
+			flavor = "tap-preferred";            
+			bindings = <&kp>, <&kp>;        
+		};    
+	};
+
 
     combos {
         compatible = "zmk,combos";
@@ -61,52 +74,52 @@
 
         keymap {
             compatible = "zmk,keymap";
-                
+		// Layer 0
 		// -------------------------------------------------------------------------------------------------------------------------
 		// |    Q    |    W    |    E    |    R    |    T    |                   |    Y    |    U    |    I    |    O    |    P    |
-		// |    A    |    S    |    D    |    F    |    G    |                   |    H    |    J    |    K    |    L    |    ;    |
+		// |  HM A   |  HM S   |  HM  D  |  HM  F  |    G    |                   |    H    |  HM  J  |  HM  K  |  HM  L  |  HM  ;  |
 		// |    Z    |    X    |    C    |    V    |    B    |                   |    N    |    M    |    ,    |    .    |    /    |
 		//                               |   Sym   |  Shift  |                   |  Space  |   Nav   |
        	default_layer { //qwerty
 		bindings = <
-		&kp Q 		&kp W 	&kp E 	&kp R 	&kp T 					&kp Y 		&kp U  	&kp I    	&kp O   	&kp P 
-		&kp A 		&kp S 	&kp D 	&kp F 	&kp G 			      	&kp H 		&kp J 	&kp K 		&kp L 		&kp QUOT
-		&mt LSFT Z 	&kp X 	&kp C 	&kp V 	&kp B				    &kp N 		&kp M  	&kp CMMA 	&kp DOT 	&mt LSFT RET
-          							&mo 1 	&kp LCTL  				&kp SPC 	&mo 2 
+		&kp Q 		&kp W 		&kp E 			&kp R 			&kp T 					&kp Y 		&kp U  			&kp I    		&kp O   	&kp P 
+		&hm LGUI A 	&hm LALT S 	&hm LCTRL D 	&hm LSHIFT F 	&kp G 			      	&kp H 		&hm RSHIFT J 	&hm RCTRL K 	&hm LALT L 	&hm RGUI SEMI
+		&kp Z	 	&kp X 		&kp C 			&kp V 			&kp B				    &kp N 		&kp M  			&kp COMMA 		&kp DOT 	&kp SLASH
+          										&mo 2 			&kp LSHIFT  			&kp SPACE 	&mo 3 
 		>;
 		};
 
-
+		// Layer 1
 		// -------------------------------------------------------------------------------------------------------------------------
-		// |    Q    |    W    |    F    |    P    |    G    |                   |    J    |    L    |    I    |    O    |    ;    |
-		// |    A    |    R    |    S    |    T    |    D    |                   |    H    |    N    |    E    |    I    |    O    |
+		// |    Q    |    W    |    F    |    P    |    G    |                   |    J    |    L    |    U    |    Y    |    ;    |
+		// |  HM  A  |  HM  R  |  HM  S  |  HM  T  |    D    |                   |    H    |  HM  N  |  HM  E  |  HM  I  |  HM  O  |
 		// |    Z    |    X    |    C    |    V    |    B    |                   |    K    |    M    |    ,    |    .    |    /    |
 		//                               |   Sym   |  Shift  |                   |  Space  |   Nav   |
        	colemak_layer { //colemak
 		bindings = <
-		&kp Q 		&kp W 	&kp E 	&kp R 	&kp T 					&kp Y 		&kp U  	&kp I    	&kp O   	&kp P 
-		&kp A 		&kp S 	&kp D 	&kp F 	&kp G 			      	&kp H 		&kp J 	&kp K 		&kp L 		&kp QUOT
-		&mt LSFT Z 	&kp X 	&kp C 	&kp V 	&kp B				    &kp N 		&kp M  	&kp CMMA 	&kp DOT 	&mt LSFT RET
-          							&mo 1 	&kp LCTL  				&kp SPC 	&mo 2 
+		&kp Q 		&kp W 		&kp F 	 		&kp P 			&kp G 					&kp J 		&kp L  			&kp U    		&kp Y   	&kp SEMI 
+		&hm LGUI A 	&hm LALT R 	&hm LCTRL S 	&kp LSHIFT T 	&kp D 			      	&kp H 		&hm RSHIFT N 	&hm RCTRL E 	&hm LALT I 	&hm RGUI O
+		&kp Z 		&kp X 		&kp C 			&kp V 			&kp B				    &kp N 		&kp M  			&kp CMMA 		&kp DOT 	&kp SLASH
+          										&mo 2 			&kp LSHIFT  			&kp SPACE 	&mo 3 
 		>;
 		};
 
-
+		// Layer 2
         // -------------------------------------------------------------------------------------------------------------------------
 		// |   ESC   |    [    |    {    |    (    |    ~    |                   |    ^    |    )    |    }    |    ]    |    `    |
-		// |    -    |    *    |    D    |    F    |    G    |                   |    #    |  RShift |  RCtrl  |   LAlt  |   RGUI  |
-		// |    +    |    |    |    C    |    V    |    B    |                   |         |    M    |    ,    |    .    |    /    |
+		// |    -    |    *    |    =    |    _    |    $    |                   |    #    |  RShift |  RCtrl  |   LAlt  |   RGUI  |
+		// |    +    |    |    |    @    |    \    |    %    |                   |         |    /    |    &    |    ?    |    !    |
 		//                               |   Sym   |  Shift  |                   |  Space  |   Nav   |
        	lower_layer { //Symbols
 		bindings = <
-		&kp NUM_1  &kp NUM_2    &kp NUM_3    	&kp NUM_4		&kp NUM_5			&kp NUM_6 	&kp NUM_7 &kp NUM_8 &kp NUM_9 &kp NUM_0 
-		&kp TAB    &kp LC(S)    &kp DQT      	&kp PIPE2     	&kp HASH 			&kp MINUS 	&kp EQL  &kp LBKT &kp RBKT  &kp DEL 
-		&kp ESC    &kp TILDE 	&kp NON_US_BSLH &kp NON_US_HASH &kp TILDE2 			&kp MINUS 	&kp GRAVE &kp LBKT &kp RBKT  &kp DEL 
-					    						&mo 1  			&kp LGUI  			&kp RGUI 	&mo 2 
+		&kp ESC  	&kp LBKT    &kp LBRC   	&kp LPAR	&kp TILDE			&kp CARET 	&kp RPAR 	&kp RBRC	&kp RBKT 	&kp GRAVE 
+		&kp MINUS   &kp ASTRK   &kp EQUAL   &kp UNDER   &kp DLLR 			&kp HASH 	&sk RSHIFT  &sk RCTRL 	&sk LALT  	&sk RGUI 
+		&kp PLUS    &kp PIPE 	&kp AT 		&kp BSLH 	&kp PRCNT 			&none	 	&kp SLASH	&kp AMPS 	&kp QMARK  	&kp EXCL 
+					    					&trans  	&trans  			&trans 		&mo 4 
 		>;
 		};
 		
-		
+		// Layer 3
 		// -------------------------------------------------------------------------------------------------------------------------
 		// |   Tab   |         |         |         |  VolUp  |                   |   Ins   |   PgUp  |   Up    |  PgDn   |   Del    |
 		// |  LGUI   |   LAlt  |  LCtrl  |  LShift |  Mute   |                   |  Home   |   Left  |   Down  |  Right  |   BckSp  |
@@ -114,14 +127,14 @@
 		//                               |   Sym   |  Shift  |                   |  Space  |   Nav   |
 		raise_layer { //Navigation
 		bindings = <
-		&kp BANG  &kp ATSN 		&kp HASH  	&kp DLLR  	&kp PRCT    		&kp CRRT  	&kp AMPS 		&kp KMLT 	&kp LPRN 	&kp RPRN 
-		&kp HASH  &kp QMARK  	&kp FSLH  	&kp COLN  	&kp SCLN 			&kp MINUS 	&kp KP_EQUAL  	&kp LBRC  	&kp RBRC   	&kp BKSP
-		&kp LSFT  &kp KPLS 		&kp LBKT 	&kp RBKT   	&kp BSLH    		&kp UNDER 	&kp LEFT 		&kp DOWN 	&kp UP  	&kp RIGHT
-					  						&mo 3 		&kp LCTL  			&kp SPC  	&mo 2 
+		&kp TAB  	&none 		&none  		&none  		&kp C_VOL_UP   		&kp INS  	&kp PG_UP 	&kp UP 		&kp PG_DN 	&kp DEL 
+		&sk LGUI  	&sk LALT  	&sk LCTRL  	&sk LSHIFT 	&kp C_MUTE 			&kp HOME 	&kp LEFT  	&kp DOWN  	&kp RIGHT   &kp BSPC
+		&kp K_UNDO 	&kp K_CUT 	&kp K_COPY 	&kp K_PASTE	&kp C_VOL_DN   		&kp END 	&kp LEFT 	&to 5 		&to 6	  	&kp ENTER
+					  						&mo 4 		&trans  			&trans  	&trans 
 		>;
 		};	
 
-
+		// Layer 4
 		// -------------------------------------------------------------------------------------------------------------------------
 		// |    1    |    2    |    3    |    4    |    5    |                   |    6    |    7    |    8    |    9    |    0    |
 		// |  LGUI   |   LAlt  |  LCtrl  |  LShift |   F11   |                   |  F12    |  RShift |  RCtrl  |   LAlt  |   RGUI  |
@@ -129,40 +142,41 @@
 		//                               |   Sym   |  Shift  |                   |  Space  |   Nav   |
 		adjust_layer { //Numbers
 		bindings = <
-		&kp NUM_1  	&kp NUM_2   &kp NUM_3   &kp NUM_4   &kp NUM_5 			&trans 	&trans   	&trans   		&trans  &trans
-		&kp F1 		&kp F2 		&kp F3 		&kp F4 		&kp F5  			&trans 	&kp PG_UP  	&kp K_VOL_UP 	&kp K_MUTE &trans 
-		&bt BT_CLR  &bt BT_NXT 	&bt BT_PRV 	&kp F6 		&kp F7   			&trans 	&kp PG_DN  	&kp K_VOL_DN  	&trans &trans   
-					 						&trans 		&trans  			&trans 	&trans 
+		&kp N1  	&kp N2   	&kp N3   	&kp N4   	&kp N5 				&kp N6 		&kp N7   	&kp N8   	&kp N9  	&kp N0
+		&sk LGUI 	&sk LALT 	&sk LCTRL 	&sk LSHIFT 	&kp F11 			&kp F12 	&sk RSHIFT  &sk RCTRL 	&sk LALT 	&sk RGUI 
+		&kp F1  	&kp F2 		&kp F3 		&kp F4 		&kp F5   			&kp F6 		&kp F7  	&kp F8  	&kp F9 		&kp F10   
+					 						&trans 		&trans  			&trans 		&trans 
 		>;
 		};	
 
-
+		// Layer 5
 		// -------------------------------------------------------------------------------------------------------------------------
 		// |         |         |         |         |         |                   |    +    |    7    |    8    |    9    |    *    |
-		// |         |         |         |         |         |                   |    .    |    4    |    5    |    6    |    0    |
+		// |         |         |         | NumLock |         |                   |    .    |    4    |    5    |    6    |    0    |
 		// |         |         |         |         |         |                   |    -    |    1    |    2    |    3    |    /    |
 		//                               | TO Base |  Shift  |                   |  Enter  | TO Base |
 		numpad_layer { //Number Pad
 		bindings = <
-		&kp NUM_1  	&kp NUM_2   &kp NUM_3   &kp NUM_4   &kp NUM_5 			&trans 	&trans   	&trans   		&trans  &trans
-		&kp F1 		&kp F2 		&kp F3 		&kp F4 		&kp F5  			&trans 	&kp PG_UP  	&kp K_VOL_UP 	&kp K_MUTE &trans 
-		&bt BT_CLR  &bt BT_NXT 	&bt BT_PRV 	&kp F6 		&kp F7   			&trans 	&kp PG_DN  	&kp K_VOL_DN  	&trans &trans   
-					 						&trans 		&trans  			&trans 	&trans 
+		&none  	&none   &none   &none   		&none 				&kp KP_PLUS 	&kp KP_N7   &kp KP_N8   &kp KP_N9  	&kp KP_MULTIPLY
+		&none 	&none 	&none 	&kp KP_NLCK 	&none  				&kp KP_DOT 		&kp KP_N4  	&kp KP_N5 	&kp KP_N6 	&kp KP_N0 
+		&none  	&none 	&none 	&none 			&none   			&kp KP_MINUS 	&kp KP_N1  	&kp KP_N2  	&kp KP_N3 	&kp KP_DIVIDE   
+					 			&to 0 			&trans  			&kp KP_ENTER 	&to 0 
 		>;
 		};
 
 
+		// Layer 6
 		// -------------------------------------------------------------------------------------------------------------------------
 		// |         |         |         |         |         |                   |         |         |         |         |         |
-		// |  Reset  | QWERTY  | COLEMAK |         |         |                   |         |         |         |         |         |
-		// |         |         |         |         |         |                   |         |         |         |         |         |
+		// |  Reset  | QWERTY  | COLEMAK |         |         |                   | BT_SEL 0| BT_SEL 1| BT_SEL 2| BT_SEL 3| BT_SEL 4|
+		// |  BT_CLR | BT_NXT  | BT_PRV  |         |         |                   |         |         |         |         |         |
 		//                               | TO Base |  Shift  |                   |  Space  | TO Base |
 		Special_layer { //Special Functions
 		bindings = <
-		&kp NUM_1  	&kp NUM_2   &kp NUM_3   &kp NUM_4   &kp NUM_5 			&trans 	&trans   	&trans   		&trans  &trans
-		&kp F1 		&kp F2 		&kp F3 		&kp F4 		&kp F5  			&trans 	&kp PG_UP  	&kp K_VOL_UP 	&kp K_MUTE &trans 
-		&bt BT_CLR  &bt BT_NXT 	&bt BT_PRV 	&kp F6 		&kp F7   			&trans 	&kp PG_DN  	&kp K_VOL_DN  	&trans &trans   
-					 						&trans 		&trans  			&trans 	&trans 
+		&none  		&none   	&none   	&none   &none 				&none 			&none   		&none   		&none  			&none
+		&reset 		&to 0 		&to 1 		&none 	&none				&bt BT_SEL 0 	&bt BT_SEL 1   	&bt BT_SEL 2   	&bt BT_SEL 3  	&bt BT_SEL 4
+		&bt BT_CLR  &bt BT_NXT 	&bt BT_PRV 	&none   &none 				&none 			&none   		&none   		&none  			&none   
+					 						&to 0 	&trans  			&trans 			&to 0 
 		>;
 		};
         
